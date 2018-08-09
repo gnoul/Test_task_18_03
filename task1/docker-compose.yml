@@ -1,0 +1,24 @@
+version: '2'
+services:
+  postgresql:
+    image: postgres:9.5
+    hostname: db
+    env_file: env
+    volumes:
+      - ./dockerfiles/pgdata:/var/lib/postgresql/data/pgdata
+#      - ./dockerfiles/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  service:
+    hostname: service
+    build: ./src
+    env_file: env
+    working_dir: /opt/service
+    command: bash -c "sleep 5 && python run.py"
+    volumes:
+      - ./src:/opt/service
+    links:
+      - "postgresql:db"
+    ports:
+      - "5001:5000"

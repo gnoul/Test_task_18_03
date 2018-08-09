@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+    <p>
+        <input type="button" class="btn" id="savebutton" value="Сохранить">
+        <input type="button" class="btn" id="addbutton" value="Добавить строки">
+        <input type="button" class="btn" id="delbutton" value="Удалить отмеченные строки">
+    </p>
+
+    <table id="users-table" class="table table-">
+        <thead>
+        <tr>
+            <th><input type="checkbox" name="select_all"></th>
+            <th>Пользователь</th>
+            <th>Пароль</th>
+            <th>Активный</th>
+            <th>Админ</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users%}
+        <tr>
+            <td><input type="checkbox" class="user" name="SelectRow" id="{{ user.id }}"></td>
+            <td><input type="text" class="user" value="{{ user.username }}"></td>
+            <td><input type="password" class="user" value="" placeholder="••••••" autocomplete="off" minlength="4"></td>
+            <td><input type="checkbox" class="user" {% if user.active %}checked{% endif %}></td>
+            <td><input type="checkbox" class="user" {% if user.is_staff %}checked{% endif %}></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+</table>
+{% endblock %}
+
+{%  block scripts  %}
+    <script type="application/javascript">
+    var editurl="{{ url_for('change_users') }}";
+    </script>
+    <script type="application/javascript" src="/js/users.js"></script>
+{% endblock %}

@@ -1,0 +1,7 @@
+POSTGRES_USER=pguser1
+POSTGRES_DB=pddb1
+POSTGRES_PASSWORD=ohd7ua2Quu
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+PGDATA=/var/lib/postgresql/data/pgdata
+DEBUG=True
