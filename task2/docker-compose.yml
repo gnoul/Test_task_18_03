@@ -1,0 +1,42 @@
+version: '2'
+services:
+
+  reciever:
+    hostname: reciever
+    build: ./reciever
+    working_dir: /opt/reciever
+    command: bash -c "sleep 5 && python run.py"
+    volumes:
+      - ./reciever:/opt/reciever
+    ports:
+      - "5101:5000"
+
+  source1:
+    hostname: source1
+    environment:
+    - filename=source1.json
+    build: ./source/
+    working_dir: /opt/source
+    command: bash -c "python run.py"
+    volumes:
+      - ./source:/opt/source
+
+  source2:
+    hostname: source2
+    environment:
+    - filename=source2.json
+    build: ./source/
+    working_dir: /opt/source
+    command: bash -c "python run.py"
+    volumes:
+      - ./source:/opt/source
+
+  source3:
+    hostname: source3
+    environment:
+    - filename=source3.json
+    build: ./source/
+    working_dir: /opt/source
+    command: bash -c "python run.py"
+    volumes:
+      - ./source:/opt/source
